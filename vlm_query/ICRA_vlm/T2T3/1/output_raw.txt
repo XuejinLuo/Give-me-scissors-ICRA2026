@@ -1,0 +1,49 @@
+```python
+# The task involves 3 stages:
+# 1. Robot 1 grasps the tweezers, and Robot 2 grasps the scissors.
+# 2. Robot 1 holds the tweezers above 10 cm, and Robot 2 holds the scissors above 10 cm.
+# 3. Robot 1 releases the tweezers on the desk, and Robot 2 releases the scissors on the desk.
+
+num_stages = 3
+
+### stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector is firmly gripping the keypoint of the tweezers."""
+    cost = np.linalg.norm(end_effector_1 - keypoints[3])
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector is firmly gripping the keypoint of the scissors."""
+    cost = np.linalg.norm(end_effector_2 - keypoints[1])
+    return cost
+
+### stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector holds the tweezers 10 cm above the desk."""
+    offsetted_point = keypoints[3] + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_1 - offsetted_point)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector holds the scissors 10 cm above the desk."""
+    offsetted_point = keypoints[1] + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - offsetted_point)
+    return cost
+
+### stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector releases the tweezers on the desk."""
+    cost = np.linalg.norm(end_effector_1 - keypoints[3])
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector releases the scissors on the desk."""
+    cost = np.linalg.norm(end_effector_2 - keypoints[1])
+    return cost
+
+grasp_keypoints_robot1 = [3, -1, -1]
+grasp_keypoints_robot2 = [1, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 3]
+release_keypoints_robot2 = [-1, -1, 1]
+```

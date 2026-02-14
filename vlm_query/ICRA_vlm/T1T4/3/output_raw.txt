@@ -1,0 +1,49 @@
+```python
+# The task involves the following stages:
+# 1. Robot 1 grasps the scalpel at keypoint 2 while Robot 2 grasps the hemostat at keypoint 1.
+# 2. Robot 1 lifts the scalpel to 10 cm above the desk while Robot 2 lifts the hemostat to 10 cm above the desk.
+# 3. Robot 1 places the scalpel back on the desk and releases it, and Robot 2 places the hemostat back on the desk and releases it.
+
+num_stages = 3
+
+### stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is firmly gripping the scalpel at keypoint 2."""
+    cost = np.linalg.norm(end_effector_1 - keypoints[2])
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is firmly gripping the hemostat at keypoint 1."""
+    cost = np.linalg.norm(end_effector_2 - keypoints[1])
+    return cost
+
+### stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector holds the scalpel 10 cm above the desk."""
+    target_position = keypoints[2] + np.array([0, 0.1, 0])  # 10cm above in the z-direction
+    cost = np.linalg.norm(end_effector_1 - target_position)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector holds the hemostat 10 cm above the desk."""
+    target_position = keypoints[1] + np.array([0, 0.1, 0])  # 10cm above in the z-direction
+    cost = np.linalg.norm(end_effector_2 - target_position)
+    return cost
+
+### stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1 places and releases the scalpel back on the desk at keypoint 2."""
+    cost = np.linalg.norm(end_effector_1 - keypoints[2])
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2 places and releases the hemostat back on the desk at keypoint 1."""
+    cost = np.linalg.norm(end_effector_2 - keypoints[1])
+    return cost
+
+grasp_keypoints_robot1 = [2, -1, -1]
+grasp_keypoints_robot2 = [1, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 2]
+release_keypoints_robot2 = [-1, -1, 1]
+```

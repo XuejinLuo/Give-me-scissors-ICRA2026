@@ -1,0 +1,57 @@
+```python
+# The task involves three stages:
+# 1. Grasping Stage: Robot 1 grasps the tweezers while Robot 2 grasps the hemostat.
+# 2. Lifting Stage: Robot 1 lifts the tweezers 10 cm above the desk, and Robot 2 lifts the hemostat 10 cm above the desk.
+# 3. Releasing Stage: Robot 1 releases the tweezers on the desk, and Robot 2 releases the hemostat on the desk.
+
+num_stages = 3
+
+# Stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is firmly gripping the tweezers at keypoint index 3."""
+    tweezers_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_1 - tweezers_keypoint)
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is firmly gripping the hemostat at keypoint index 1."""
+    hemostat_keypoint = keypoints[1]
+    cost = np.linalg.norm(end_effector_2 - hemostat_keypoint)
+    return cost
+
+# Stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1 lifts the tweezers 10 cm above the desk."""
+    tweezers_keypoint = keypoints[3]
+    target_position = tweezers_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_1 - target_position)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2 lifts the hemostat 10 cm above the desk."""
+    hemostat_keypoint = keypoints[1]
+    target_position = hemostat_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - target_position)
+    return cost
+
+# Stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1 releases the tweezers on the desk. The cost is related to the end-effector's proximity to the desk's surface."""
+    tweezers_keypoint = keypoints[3]
+    desk_surface = tweezers_keypoint.copy()
+    cost = np.linalg.norm(end_effector_1 - desk_surface)
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2 releases the hemostat on the desk. The cost is related to the end-effector's proximity to the desk's surface."""
+    hemostat_keypoint = keypoints[1]
+    desk_surface = hemostat_keypoint.copy()
+    cost = np.linalg.norm(end_effector_2 - desk_surface)
+    return cost
+
+grasp_keypoints_robot1 = [3, -1, -1]
+grasp_keypoints_robot2 = [1, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 3]
+release_keypoints_robot2 = [-1, -1, 1]
+```

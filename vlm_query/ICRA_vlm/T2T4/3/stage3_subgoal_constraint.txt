@@ -1,0 +1,12 @@
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector releases the tweezers on the desk."""
+    # No specific position constraint as the tweezers are released
+    cost = 0  # Assuming zero cost for release action
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector releases the hemostat on the desk."""
+    # No specific position constraint as the hemostat is released
+    cost = 0  # Assuming zero cost for release action
+    return cost
+

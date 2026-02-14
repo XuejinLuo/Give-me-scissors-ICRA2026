@@ -1,0 +1,62 @@
+```python
+
+# The task consists of three stages: 
+# Stage 1: Robot 1 grasps the scalpel at keypoint 1 while Robot 2 grasps the scissors at keypoint 2.
+# Stage 2: Robot 1 holds the scalpel above 10 cm from the desk while Robot 2 does the same with the scissors.
+# Stage 3: Robot 1 releases the scalpel on the desk, and Robot 2 releases the scissors on the desk.
+
+num_stages = 3
+
+### Stage 1 sub-goal constraints (Grasping)
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is firmly gripping the scalpel at keypoint 1."""
+    cost = np.linalg.norm(end_effector_1 - keypoints[1])
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is firmly gripping the scissors at keypoint 2."""
+    cost = np.linalg.norm(end_effector_2 - keypoints[2])
+    return cost
+
+### Stage 2 sub-goal constraints (Holding above 10 cm)
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1 holds the scalpel 0.1m above the desk."""
+    # Assuming keypoint 1's z-coordinate represents the desk level
+    scalpel_position_above_desk = keypoints[1] + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_1 - scalpel_position_above_desk)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2 holds the scissors 0.1m above the desk."""
+    # Assuming keypoint 2's z-coordinate represents the desk level
+    scissors_position_above_desk = keypoints[2] + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - scissors_position_above_desk)
+    return cost
+
+### Stage 3 sub-goal constraints (Releasing)
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1 releases the scalpel on the desk. Confirm the scalpel is on the desk."""
+    # No cost associated with the end-effector directly as it should not hold the object,
+    # but ensuring that the scalpel keypoint 1 is back at desk level
+    cost = -1  # Indicative that the constraint is implicitly satisfied by releasing
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2 releases the scissors on the desk. Confirm the scissors are on the desk."""
+    # No cost associated with the end-effector directly as it should not hold the object,
+    # but ensuring that the scissors keypoint 2 is back at desk level
+    cost = -1  # Indicative that the constraint is implicitly satisfied by releasing
+    return cost
+
+# Summarize keypoints to be grasped by robot 1 in all grasping stages.
+grasp_keypoints_robot1 = [1, -1, -1]
+
+# Summarize keypoints to be grasped by robot 2 in all grasping stages.
+grasp_keypoints_robot2 = [2, -1, -1]
+
+# Summarize at the end of which stage robot 1 should release the keypoints.
+release_keypoints_robot1 = [-1, -1, 1]
+
+# Summarize at the end of which stage robot 2 should release the keypoints.
+release_keypoints_robot2 = [-1, -1, 2]
+```

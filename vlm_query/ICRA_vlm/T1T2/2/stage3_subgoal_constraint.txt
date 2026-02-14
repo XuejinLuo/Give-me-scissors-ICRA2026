@@ -1,0 +1,10 @@
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector releases the scalpel on the desk."""
+    # No specific constraint on position since it's a release stage.
+    return 0
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector releases the tweezers on the desk."""
+    # No specific constraint on position since it's a release stage.
+    return 0
+

@@ -1,0 +1,55 @@
+```python
+# The task involves 3 stages:
+# 1. Robot 1 picks up the scalpel (keypoint 3) while Robot 2 picks up the scissors (keypoint 1).
+# 2. Robot 1 holds the scalpel 10 cm above the desk while Robot 2 holds the scissors 10 cm above the desk.
+# 3. Robot 1 releases the scalpel on the desk while Robot 2 releases the scissors on the desk.
+
+num_stages = 3
+
+### stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is grasping the scalpel at keypoint 3."""
+    scalpel_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_1 - scalpel_keypoint)
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is grasping the scissors at keypoint 1."""
+    scissors_keypoint = keypoints[1]
+    cost = np.linalg.norm(end_effector_2 - scissors_keypoint)
+    return cost
+
+### stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is holding the scalpel 10 cm above the desk."""
+    scalpel_keypoint = keypoints[3]
+    offsetted_point = scalpel_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_1 - offsetted_point)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is holding the scissors 10 cm above the desk."""
+    scissors_keypoint = keypoints[1]
+    offsetted_point = scissors_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - offsetted_point)
+    return cost
+
+### stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector releases the scalpel on the desk."""
+    scalpel_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_1 - scalpel_keypoint)
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector releases the scissors on the desk."""
+    scissors_keypoint = keypoints[1]
+    cost = np.linalg.norm(end_effector_2 - scissors_keypoint)
+    return cost
+
+grasp_keypoints_robot1 = [3, -1, -1]
+grasp_keypoints_robot2 = [1, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 3]
+release_keypoints_robot2 = [-1, -1, 1]
+```

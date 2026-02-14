@@ -1,0 +1,55 @@
+```python
+# The task involves 3 stages:
+# 1. Robot 1 picks up the scissors while Robot 2 picks up the hemostat.
+# 2. Robot 1 holds the scissors above 10 cm while Robot 2 holds the hemostat above 10 cm.
+# 3. Robot 1 releases the scissors on the desk while Robot 2 releases the hemostat on the desk.
+
+num_stages = 3
+
+### stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector is firmly gripping the keypoint of the scissors."""
+    scissors_keypoint = keypoints[3]  # Grasping the scissors at keypoint 3
+    cost = np.linalg.norm(end_effector_1 - scissors_keypoint)
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector is firmly gripping the keypoint of the hemostat."""
+    hemostat_keypoint = keypoints[4]  # Grasping the hemostat at keypoint 4
+    cost = np.linalg.norm(end_effector_2 - hemostat_keypoint)
+    return cost
+
+### stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector holds the scissors 10 cm above the desk."""
+    scissors_keypoint = keypoints[3]
+    offsetted_point = scissors_keypoint + np.array([0, 0, 0.1])  # 10 cm above
+    cost = np.linalg.norm(end_effector_1 - offsetted_point)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector holds the hemostat 10 cm above the desk."""
+    hemostat_keypoint = keypoints[4]
+    offsetted_point = hemostat_keypoint + np.array([0, 0, 0.1])  # 10 cm above
+    cost = np.linalg.norm(end_effector_2 - offsetted_point)
+    return cost
+
+### stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Ensure Robot 1's end-effector releases the scissors on the desk."""
+    scissors_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_1 - scissors_keypoint)
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Ensure Robot 2's end-effector releases the hemostat on the desk."""
+    hemostat_keypoint = keypoints[4]
+    cost = np.linalg.norm(end_effector_2 - hemostat_keypoint)
+    return cost
+
+grasp_keypoints_robot1 = [3, -1, -1]
+grasp_keypoints_robot2 = [4, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 3]
+release_keypoints_robot2 = [-1, -1, 4]
+```

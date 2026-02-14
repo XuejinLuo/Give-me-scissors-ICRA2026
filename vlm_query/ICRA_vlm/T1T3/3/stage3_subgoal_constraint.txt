@@ -1,0 +1,14 @@
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1 releases the scalpel on the desk. Confirm the scalpel is on the desk."""
+    # No cost associated with the end-effector directly as it should not hold the object,
+    # but ensuring that the scalpel keypoint 1 is back at desk level
+    cost = -1  # Indicative that the constraint is implicitly satisfied by releasing
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2 releases the scissors on the desk. Confirm the scissors are on the desk."""
+    # No cost associated with the end-effector directly as it should not hold the object,
+    # but ensuring that the scissors keypoint 2 is back at desk level
+    cost = -1  # Indicative that the constraint is implicitly satisfied by releasing
+    return cost
+

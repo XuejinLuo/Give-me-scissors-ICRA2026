@@ -1,0 +1,147 @@
+## Instructions
+Suppose you are controlling 2 robots to perform manipulation tasks by writing constraint functions in Python. The manipulations task is given as an image of the environment, overlayed with keypoints marked with their indices, along with a text instruction. For each given task, please perform the following steps:
+- Determine how many stages are involved in the task. Each stage should clearly describe the coordinated actions of both robots, ensuring that both robots are actively involved in every stage. Some examples:
+  - "Both robots collaborate to lift a large box":
+    - 3 stages: 
+      - "Robot 1 grasp one side of the box while Robot 2 grasp the other side of the box", 
+      - "Both robots lift the box simultaneously", 
+      - "Both robots move the lifted box to the target location and release the box"
+  - "One robot holds a part while the other assembles a component onto it":
+    - 3 stages: 
+      - "Robot 1 grasp and hold the part steadily while Robot 2 grasp the component to be assembled", 
+      - "Robot 2 precisely align and attach the component to the part held by Robot 1", 
+  - "Two robots place a cup on a saucer":
+    - 4 stages: 
+      - "Robot 1 grasp the cup while Robot 2 grasp the saucer", 
+      - "Robot 1 moves the cup above the saucer held by Robot 2", 
+      - "Robot 1 lowers the cup onto the saucer with coordinated movements from Robot 2 to ensure stability",
+
+- For each stage, write constraints for two robots, "sub-goal constraints for Robot x". The "sub-goal constraints for Robot x" are constraints that must be satisfied **at the end of the stage**. Some examples:
+  - "Both robots collaborate to lift a large box":
+    - "Robot 1 grasp one side of the box while Robot 2 grasp the other side of the box" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector is firmly gripping the left - side keypoint of the box."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector is firmly gripping the right - side keypoint of the box."
+    - "Both robots lift the box simultaneously" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector lifts the box 0.1m above the ground."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector lifts the box 0.1m above the ground."
+    - "Both robots move the lifted box to the target location and release the box" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector placed the box accurately at the target location and releases the gripper."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector placed the box accurately at the target location and releases the gripper."
+
+  - One robot holds a part while the other assembles a component onto it:
+    - "Robot 1 grasp and hold the part steadily while Robot 2 grasp the component to be assembled" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector firmly holds the part at its designated keypoint."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector grasps the component at its relevant keypoint."
+    - "Robot 2 precisely align and attach the component to the part held by Robot 1" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector firmly holds the part with correct orientation."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector accurately attaches the component to the part with correct orientation."
+
+  - "Two robots place a cup on a saucer":
+    - "Robot 1 grasp the cup while Robot 2 grasp the saucer" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector firmly holds the cup's handle keypoint."
+      - sub-goal constraints for Robot 1: "Robot 2's end-effector holds the saucer's edge keypoint."
+    - "Robot 1 moves the cup above the saucer held by Robot 2" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector holds the cup 0.1m directly above the saucer."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector holds the saucer's edge keypoint."
+    - "Robot 1 lowers the cup onto the saucer with coordinated movements from Robot 2 to ensure stability" stage:
+      - sub-goal constraints for Robot 1: "Robot 1's end-effector holds the cup and gently placed on the saucer without spilling any liquid."
+      - sub-goal constraints for Robot 2: "Robot 2's end-effector holds the saucer without spilling any liquid."
+- Summarize keypoints to be grasped in all grasping stages by defining the `grasp_keypoints` variable.
+- Summarize at the end of which stage the robot should release the keypoints by defining the `release_keypoints` variable.
+
+**Note:**
+- Each constraint takes corresponding robot's end - effector points and a set of keypoints as input and returns a numerical cost, where the constraint is satisfied if the cost is smaller than or equal to zero.
+- For each stage, you should write two sub-goal constraints for two robots, respectively.
+- Avoid using "if" statements in your constraints.
+- Avoid using path constraints when manipulating deformable objects (e.g., clothing, towels).
+- You do not need to consider collision avoidance. Focus on what is necessary to complete the task.
+- Inputs to the constraints are as follows:
+  - `end_effector_1/end_effector_2`: np.array of shape (3,) representing the end - effector position of Robot 1.
+  - `keypoints`: np.array of shape `(K, 3)` representing the keypoint positions.
+- The positions of the end_effector_1 and end_effector_2 cannot overlap.
+- Inside of each function, you may use native Python functions, any NumPy functions.
+- Each robot can only grasp one object at a time.
+- Grasping must be an independent stage from other stages.
+- You may use two keypoints to form a vector, which can be used to specify a rotation (by specifying the angle between the vector and a fixed axis).
+- You may use multiple keypoints to specify a surface or volume.
+- The keypoints marked on the image start with index 0, same as the given argument `keypoints` array.
+- For a point `i` to be relative to another point `j`, the function should define an `offsetted_point` variable that has the delta added to keypoint `j and then calculate the norm of the xyz coordinates of the keypoint `i` and the `offsetted_point`.
+- If you would like to specify a location not marked by a keypoint, try using multiple keypoints to specify the location (e.g., you may take the mean of multiple keypoints if the desired location is in the center of those keypoints).
+- In sub - goal constraints functions, the cost must be related to the end - effector point.
+- Avoid having either end - effector not included in the cost during the sub - target constraint.
+- Avoid using max function when outputting cost, ensure that the output is a positive number.
+- The object names and bounding boxes have already been labeled; we just need to find the corresponding numeric indices.
+- There are scissors, scalpel, tweezers and hemostat on the desk. 
+
+**Structure your output in a single python code block as follows:**
+```python
+
+# Your explanation of how many stages are involved in the task and what each stage is about.
+# ...
+
+num_stages = ?
+
+### stage 1 sub-goal constraints (if any)
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Put your explanation here."""
+    ...
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Put your explanation here."""
+    ...
+    return cost
+
+# The cost must be related to end-effectors point.
+...
+
+# repeat for more stages
+...
+
+"""
+Summarize keypoints to be grasped by robot 1 in all grasping stages.
+The length of the list should be equal to the number of stages.
+For grasping stage, write the keypoint index. For non - grasping stage and release stage, write -1.
+Do not include comments or '#' symbols.
+A stage cannot be both grasping and releasing stages.
+The keypoint index of the same stage cannot appear in both grasping and releasing stages at the same time.
+"""
+grasp_keypoints_robot1 = [?, ..., ?]
+
+"""
+Summarize keypoints to be grasped by robot 2 in all grasping stages.
+The length of the list should be equal to the number of stages.
+For grasping stage, write the keypoint index. For non - grasping stage and release stage, write -1.
+Do not include comments or '#' symbols.
+A stage cannot be both grasping and releasing stages.
+The keypoint index of the same stage cannot appear in both grasping and releasing stages at the same time.
+"""
+grasp_keypoints_robot2 = [?, ..., ?]
+
+"""
+Summarize at **the end of which stage** robot 1 should release the keypoints.
+The keypoint indices must appear in an earlier stage as defined in `grasp_keypoints_robot1` (i.e., a keypoint can only be released only if it has been grasped previously).
+Only release object when it's necessary to complete the task, e.g., drop bouquet in the vase.
+The length of the list should be equal to the number of stages.
+If a keypoint is to be released at the end of a stage, write the keypoint index at the corresponding location. Otherwise, write -1.
+Do not include comments or '#' symbols.
+The keypoint index of the same stage cannot appear in both grasping and releasing stages at the same time.
+"""
+release_keypoints_robot1 = [?, ..., ?]
+
+"""
+Summarize at **the end of which stage** robot 2 should release the keypoints.
+The keypoint indices must appear in an earlier stage as defined in `grasp_keypoints_robot2` (i.e., a keypoint can only be released only if it has been grasped previously).
+Only release object when it's necessary to complete the task, e.g., drop bouquet in the vase.
+The length of the list should be equal to the number of stages.
+If a keypoint is to be released at the end of a stage, write the keypoint index at the corresponding location. Otherwise, write -1.
+Do not include comments or '#' symbols.
+The keypoint index of the same stage cannot appear in both grasping and releasing stages at the same time.
+"""
+release_keypoints_robot2 = [?, ..., ?]
+
+```
+
+## Query
+Query Task: "Robot 1 picks up the scalpel and Robot 2 picks up the hemostat. Then Robot 1 holds scalpel above 10 cm and Robot 2 holds hemostat above 10 cm. Then Robot 1 releases the scalpel on the desk and Robot 2 releases the hemostat on the desk."
+Query Image:

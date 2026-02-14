@@ -1,0 +1,1 @@
+{"init_keypoint_positions": [[-0.00797936388611675, 0.060489588639398316, 0.804], [0.09736337717414548, 0.07746349931819213, 0.788], [0.20161067258676216, 0.067196910780268, 0.805]], "num_keypoints": 3, "num_stages": 3, "grasp_keypoints_robot1": [1, -1, -1], "grasp_keypoints_robot2": [0, -1, -1], "release_keypoints_robot1": [-1, -1, 1], "release_keypoints_robot2": [-1, -1, 0]}

@@ -1,0 +1,69 @@
+```python
+# The task involves 4 stages:
+# 1. Robot 1 picks up the scalpel while Robot 2 picks up the tweezers.
+# 2. Robot 1 holds the scalpel above 10 cm while Robot 2 holds the tweezers above 10 cm.
+# 3. Robot 1 releases the scalpel on the desk while Robot 2 holds the tweezers above 10 cm.
+# 4. Robot 2 releases the tweezers on the desk.
+
+num_stages = 4
+
+### stage 1 sub-goal constraints
+def stage1_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector is firmly gripping the scalpel at keypoint 0."""
+    scalpel_keypoint = keypoints[0]
+    cost = np.linalg.norm(end_effector_1 - scalpel_keypoint)
+    return cost
+
+def stage1_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector is firmly gripping the tweezers at keypoint 3."""
+    tweezers_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_2 - tweezers_keypoint)
+    return cost
+
+### stage 2 sub-goal constraints
+def stage2_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector holds the scalpel 10 cm above the desk."""
+    scalpel_keypoint = keypoints[0]
+    offsetted_point = scalpel_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_1 - offsetted_point)
+    return cost
+
+def stage2_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector holds the tweezers 10 cm above the desk."""
+    tweezers_keypoint = keypoints[3]
+    offsetted_point = tweezers_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - offsetted_point)
+    return cost
+
+### stage 3 sub-goal constraints
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector releases the scalpel on the desk."""
+    scalpel_keypoint = keypoints[0]
+    cost = np.linalg.norm(end_effector_1 - scalpel_keypoint)
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector holds the tweezers 10 cm above the desk."""
+    tweezers_keypoint = keypoints[3]
+    offsetted_point = tweezers_keypoint + np.array([0, 0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - offsetted_point)
+    return cost
+
+### stage 4 sub-goal constraints
+def stage4_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector is free from any object."""
+    cost = 0  # No specific constraint for Robot 1 in this stage
+    return cost
+
+def stage4_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector releases the tweezers on the desk."""
+    tweezers_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_2 - tweezers_keypoint)
+    return cost
+
+grasp_keypoints_robot1 = [0, -1, -1, -1]
+grasp_keypoints_robot2 = [3, -1, -1, -1]
+
+release_keypoints_robot1 = [-1, -1, 0, -1]
+release_keypoints_robot2 = [-1, -1, -1, 3]
+```

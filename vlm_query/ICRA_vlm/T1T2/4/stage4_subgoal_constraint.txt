@@ -1,0 +1,11 @@
+def stage4_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1's end-effector is free from any object."""
+    cost = 0  # No specific constraint for Robot 1 in this stage
+    return cost
+
+def stage4_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2's end-effector releases the tweezers on the desk."""
+    tweezers_keypoint = keypoints[3]
+    cost = np.linalg.norm(end_effector_2 - tweezers_keypoint)
+    return cost
+

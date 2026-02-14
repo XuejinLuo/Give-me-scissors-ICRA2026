@@ -1,0 +1,13 @@
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1 places the scalpel on the desk and releases it."""
+    scalpel_keypoint = keypoints[2]
+    cost = np.linalg.norm(end_effector_1 - scalpel_keypoint)
+    return cost
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2 continues holding the hemostat 0.1m above the desk."""
+    hemostat_keypoint = keypoints[1]
+    lifted_position = hemostat_keypoint + np.array([0.0, 0.0, 0.1])
+    cost = np.linalg.norm(end_effector_2 - lifted_position)
+    return cost
+

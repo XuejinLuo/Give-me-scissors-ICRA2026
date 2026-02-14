@@ -1,0 +1,10 @@
+def stage3_subgoal_constraint_robot1(end_effector_1, keypoints):
+    """Robot 1 releases the scalpel on the desk."""
+    # No specific constraint for end-effector position since the scalpel is released.
+    return 0
+
+def stage3_subgoal_constraint_robot2(end_effector_2, keypoints):
+    """Robot 2 releases the hemostat on the desk."""
+    # No specific constraint for end-effector position since the hemostat is released.
+    return 0
+
