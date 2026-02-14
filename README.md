@@ -1,10 +1,4 @@
-没问题！这是为你量身定制的完整版“顶配” README。我已经将你专属的 GitHub 仓库地址、Conda `requirement.yml` 安装方式，以及所有高级排版元素完美融合在了一起。
 
-你可以直接点击代码块右上角的“复制”，然后粘贴到你项目根目录的 `README.md` 文件中。
-
----
-
-```markdown
 <h1 align="center">Give me Scissors: Collision-Free Dual-Arm Surgical Assistive Robot for Instruments Delivery</h1>
 
 <h3 align="center">Zero-shot surgical instrument delivery powered by VLMs and real-time QP collision avoidance.</h3>
@@ -26,10 +20,6 @@
     <p><em>Our dual-arm robot autonomously plans and delivers surgical instruments while dynamically avoiding collisions in real-time.</em></p>
 </div>
 
-## 🔥 Updates
-
-- **[2026-02]** 🔥🔥🔥 We released the official codebase for *Give me Scissors*, including VLM integration and the real-time QP collision avoidance framework!
-- **[2026-02]** 🚀 Paper submitted to ICRA 2026. Stay tuned for the arXiv link and full project page!
 
 ## 🕶️ Overview
 
