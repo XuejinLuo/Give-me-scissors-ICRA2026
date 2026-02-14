@@ -8,7 +8,6 @@
   &nbsp;
   <a href="#"><img src="https://img.shields.io/badge/%F0%9F%8F%A0%20Project-Homepage-blue" alt="Project Homepage"></a>
   &nbsp;
-  
   <a href="https://img.shields.io/badge/license-MIT-blue.svg"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   &nbsp;
   <a href="https://img.shields.io/badge/ROS-2-green"><img src="https://img.shields.io/badge/ROS-2-green" alt="ROS2"></a>
@@ -27,7 +26,7 @@ During the perioperative phase, scrub nurses are required to frequently deliver 
 
 
 <div align="center"> 
-    <img src="assets/pipeline.png" alt="System Pipeline" style="width=90%;vertical-align:middle">
+    <img src="images/pipeline.png" alt="System Pipeline" style="width=90%;vertical-align:middle">
     <p><em>System Architecture: Multi-modal VLM task planning meets real-time QP reactive collision avoidance.</em></p>
 </div>
 
