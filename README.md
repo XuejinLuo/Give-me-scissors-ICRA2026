@@ -33,10 +33,10 @@ During the perioperative phase, scrub nurses are required to frequently deliver 
 </div>
 
 ### ✨ Key Features
-- **Zero-Shot VLM Task Planning**: Utilizes Vision Language Models (e.g., GPT-4o) to automatically generate grasping and delivery sub-goals from surgeon's natural language instructions and visual features[cite: 8, 425].
-- **Unified QP Collision Avoidance**: A unified Quadratic Programming (QP) framework ensures real-time reactive obstacle avoidance and self-collision avoidance simultaneously during autonomous movement[cite: 10, 108].
-- [cite_start]**Markerless Dynamic Perception**: Predicts the minimum distance between robot links and environmental obstacles in real-time without relying on visual markers[cite: 102].
-- [cite_start]**High Success Rate**: Achieves an 83.33% success rate in real-world surgical instrument delivery tasks with smooth, collision-free motion[cite: 11].
+- **Zero-Shot VLM Task Planning**: Utilizes Vision Language Models (e.g., GPT-4o) to automatically generate grasping and delivery sub-goals from surgeon's natural language instructions and visual features.
+- **Unified QP Collision Avoidance**: A unified Quadratic Programming (QP) framework ensures real-time reactive obstacle avoidance and self-collision avoidance simultaneously during autonomous movement.
+- **Markerless Dynamic Perception**: Predicts the minimum distance between robot links and environmental obstacles in real-time without relying on visual markers.
+- **High Success Rate**: Achieves an 83.33% success rate in real-world surgical instrument delivery tasks with smooth, collision-free motion.
 
 ## 🛠️ Installation
 
@@ -94,19 +94,16 @@ python run.py --mode rekep --instruction "Robot 1 picks up the tweezers. Then Ro
 
 The real-world experimental platform for this system consists of:
 
-* 
+
 **Robotic Arms**: 2x Franka Research 3 robotic arms.
 
 
-* 
 **Low-Level Control**: Industrial computers running Ubuntu 22.04 LTS and PREEMPT_RT kernel at 1 kHz.
 
 
-* 
 **Perception**: 3x Intel RealSense D435i RGB-D cameras.
 
 
-* 
 **Middleware**: ROS 2.
 
 
