@@ -23,7 +23,7 @@
 
 ## 🕶️ Overview
 
-[cite_start]During the perioperative phase, scrub nurses are required to frequently deliver surgical instruments to surgeons, which can lead to physical fatigue and decreased focus[cite: 4]. [cite_start]Traditional robotic scrub nurses rely on predefined pathways, which limits their generalization and poses safety risks in dynamic environments[cite: 6]. 
+During the perioperative phase, scrub nurses are required to frequently deliver surgical instruments to surgeons, which can lead to physical fatigue and decreased focus[cite: 4]. [cite_start]Traditional robotic scrub nurses rely on predefined pathways, which limits their generalization and poses safety risks in dynamic environments[cite: 6]. 
 
 [cite_start]To address these challenges, we present a collision-free dual-arm surgical assistive robot capable of zero-shot instrument delivery[cite: 7]. 
 
