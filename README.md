@@ -23,9 +23,9 @@
 
 ## 🕶️ Overview
 
-During the perioperative phase, scrub nurses are required to frequently deliver surgical instruments to surgeons, which can lead to physical fatigue and decreased focus[cite: 4]. [cite_start]Traditional robotic scrub nurses rely on predefined pathways, which limits their generalization and poses safety risks in dynamic environments[cite: 6]. 
+During the perioperative phase, scrub nurses are required to frequently deliver surgical instruments to surgeons, which can lead to physical fatigue and decreased focus. Robotic scrub nurses provide a promising solution that can replace repetitive tasks and enhance efficiency. Existing research on robotic scrub nurses rely on predefined pathways for instru- ment delivery, which limits their generalization and poses safety risks in dynamic environments. To address these challenges, we present a collision-free dual-arm surgical assistive robot which currently could perform instrument delivery. A vision language model is utilized to automatically generate the robot's grasping and delivery trajectories in a zero-shot manner based on surgeon's instructions. A real-time obstacle minimum distance perception method is proposed and integrated into a unified quadratic programming framework. This ensures reactive obstacle avoidance and self-collision avoidance during the dual-arm robot's autonomous motion in a dynamic envi- ronment. Extensive experimental validation demonstrates that the proposed robotic system achieves a 83.33% success rate in surgical instrument delivery, and has maintained smooth collision-free motion throughout the process. Project page and source code are available at https://give-me-scissors.github.io/.
 
-[cite_start]To address these challenges, we present a collision-free dual-arm surgical assistive robot capable of zero-shot instrument delivery[cite: 7]. 
+
 
 <div align="center"> 
     <img src="assets/pipeline.png" alt="System Pipeline" style="width=90%;vertical-align:middle">
@@ -33,8 +33,8 @@ During the perioperative phase, scrub nurses are required to frequently deliver 
 </div>
 
 ### ✨ Key Features
-- [cite_start]**Zero-Shot VLM Task Planning**: Utilizes Vision Language Models (e.g., GPT-4o) to automatically generate grasping and delivery sub-goals from surgeon's natural language instructions and visual features[cite: 8, 425].
-- [cite_start]**Unified QP Collision Avoidance**: A unified Quadratic Programming (QP) framework ensures real-time reactive obstacle avoidance and self-collision avoidance simultaneously during autonomous movement[cite: 10, 108].
+- **Zero-Shot VLM Task Planning**: Utilizes Vision Language Models (e.g., GPT-4o) to automatically generate grasping and delivery sub-goals from surgeon's natural language instructions and visual features[cite: 8, 425].
+- **Unified QP Collision Avoidance**: A unified Quadratic Programming (QP) framework ensures real-time reactive obstacle avoidance and self-collision avoidance simultaneously during autonomous movement[cite: 10, 108].
 - [cite_start]**Markerless Dynamic Perception**: Predicts the minimum distance between robot links and environmental obstacles in real-time without relying on visual markers[cite: 102].
 - [cite_start]**High Success Rate**: Achieves an 83.33% success rate in real-world surgical instrument delivery tasks with smooth, collision-free motion[cite: 11].
 
