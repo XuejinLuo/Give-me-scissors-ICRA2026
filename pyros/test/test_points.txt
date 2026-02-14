@@ -1,0 +1,2 @@
+robot1_absolute_pos: [0.3, -0.1, 0.5], robot1_absolute_quat: [0.9500186, 0.3024003, 0, -0.0775798], robot1_grab: -1, robot2_absolute_pos: [0.4, 0.0, 0.4], robot2_absolute_quat: [1.0, 0.0, 0.0, 0.0], robot2_grab: -1
+robot1_absolute_pos: [0.3, 0.0, 0.6], robot1_absolute_quat: [1.0, 0.0, 0.0, 0.0], robot1_grab: 1, robot2_absolute_pos: [0.3, 0.0, 0.5], robot2_absolute_quat: [0.9500186, 0.3024003, 0, -0.0775798], robot2_grab: 1

@@ -1,0 +1,140 @@
+device: &device 'cuda'
+seed: &seed 0
+
+main:
+  interpolate_pos_step_size: &interpolate_pos_step_size 0.001  # controls the density of the final returned path, 0.002m / 20ms
+  interpolate_rot_step_size: &interpolate_rot_step_size 0.005
+  grasp_depth: 0.05 #0.005
+  constraint_tolerance: 0.10  # for backtracking
+  bounds_min: &bounds_min [-1, -1, 0.016]
+  bounds_max: &bounds_max [1, 1, 1.5]
+  sdf_voxel_size: 0.01
+  vlm_camera: 0
+  action_steps_per_iter: 2000
+  time_period: 0.02
+  seed: *seed
+  show_features: False
+
+  
+camera:
+  height: 480
+  width: 640
+  camera337_base_robot: &camera337_base_robot
+    - [  -0.982817684623242 ,  0.049091638409883 , -0.177930913081574 ,  0.381500335394021]
+    - [   0.169660366200986 ,  0.619932364519710 , -0.766093482260193 ,  0.213968263949076]
+    - [   0.072696347448525 , -0.783118046311816 , -0.617609396470300 ,  0.608819635566310]
+    - [0, 0, 0, 1]
+  camera244_base_robot: &camera244_base_robot
+    - [   0.980788749528169 ,  0.037611870297737 ,  0.191412580599281 ,  0.175356987636746]
+    - [  -0.185357285637049 , -0.126121172729823 ,  0.974544060805113 , -1.033980722915542]
+    - [   0.060795603954855 , -0.991301567133817 , -0.116726593104588 ,  0.426647322093414]
+    - [0, 0, 0, 1]
+  camera231_base_robot: &camera231_base_robot
+    - [  -0.360036954455758 , -0.594217116087379 ,  0.719221391766833 , -0.237804750530287]
+    - [  -0.932552621855648 ,  0.251381460427249 , -0.259138898708048 , -0.280945474409250]
+    - [  -0.026814154776510 , -0.764011374458694 , -0.644645344977655 ,  0.583848118320205]
+    - [0, 0, 0, 1]
+  
+  camera_calib_offset: &camera_calib_offset [0.0, 0.0, 0.0]
+  roi_x_min: 100
+  roi_x_max: 520
+  roi_y_min: 230
+  roi_y_max: 400
+
+env:
+  video_cache_size: 2000
+  og_sim:
+    physics_frequency: 60
+    action_frequency: 15
+    
+  scene:
+    name: Rs_int
+    type: InteractiveTraversableScene
+    scene_model: Rs_int
+
+  bounds_min: *bounds_min
+  bounds_max: *bounds_max
+  interpolate_pos_step_size: *interpolate_pos_step_size
+  interpolate_rot_step_size: *interpolate_rot_step_size
+
+  robot:
+    robot_config:
+      name: Fetch
+      type: Fetch
+      obs_modalities: [rgb, depth]
+      action_modalities: continuous
+      action_normalize: False
+      position: [-0.8, 0.0, 0.]
+      grasping_mode: assisted
+
+      controller_config:
+        base:
+          name: DifferentialDriveController
+        arm_0:
+          name: OperationalSpaceController
+          kp: 250
+          kp_limits: [50, 400]
+          damping_ratio: 0.6
+        gripper_0:
+          name: MultiFingerGripperController
+          command_input_limits: [0.0, 1.0]
+          mode: smooth
+        camera:
+          name: JointController
+
+  camera:
+    # recorder 
+    1:
+      name: cam_1
+      position: [ 0.6137,  0.4764,  1.4565]
+      orientation: [ 0.3212,  0.4682,  0.6788,  0.4656]
+      resolution: 480
+
+    # vlm camera
+    0:
+      name: cam_0
+      position: [-0.1655,  0.0167,  1.3664]
+      orientation: [ 0.0550,  0.0544,  0.7010,  0.7090]
+      resolution: 480
+
+path_solver:
+  opt_pos_step_size: 0.20  # controls the density of control points in the path
+  opt_rot_step_size: 0.78  # controls the density of control points in the path
+  opt_interpolate_pos_step_size: 0.02  # controls the density of collision checking inside optimization
+  opt_interpolate_rot_step_size: 0.10
+  max_collision_points: 60
+  sampling_maxfun: 5000
+  bounds_min: *bounds_min
+  bounds_max: *bounds_max
+  constraint_tolerance: 0.0001
+  minimizer_options:
+    maxiter: 200
+
+subgoal_solver:
+  bounds_min: *bounds_min
+  bounds_max: *bounds_max
+  sampling_maxfun: 5000
+  max_collision_points: 60
+  constraint_tolerance: 0.0001
+  minimizer_options:
+    maxiter: 200
+
+keypoint_proposer:
+  num_candidates_per_mask: 5
+  min_dist_bt_keypoints: 0.06
+  max_mask_ratio: 0.5
+  device: *device
+  bounds_min: *bounds_min
+  bounds_max: *bounds_max
+  seed: *seed
+
+constraint_generator:
+  model: gpt-4o-2024-08-06
+  # model: gpt-4o
+  temperature: 0.5
+  max_tokens: 2048
+  api_key: 'sk-GDdtHqx6NDtrxV7bkqKcCcEGY5OWvGCexIVRVNxe8zIAoo5w' #20250321
+  
+visualizer:
+  bounds_min: *bounds_min
+  bounds_max: *bounds_max
