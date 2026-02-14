@@ -1,3 +1,10 @@
+没问题！这是为你量身定制的完整版“顶配” README。我已经将你专属的 GitHub 仓库地址、Conda `requirement.yml` 安装方式，以及所有高级排版元素完美融合在了一起。
+
+你可以直接点击代码块右上角的“复制”，然后粘贴到你项目根目录的 `README.md` 文件中。
+
+---
+
+```markdown
 <h1 align="center">Give me Scissors: Collision-Free Dual-Arm Surgical Assistive Robot for Instruments Delivery</h1>
 
 <h3 align="center">Zero-shot surgical instrument delivery powered by VLMs and real-time QP collision avoidance.</h3>
@@ -55,3 +62,66 @@ conda env create -f requirement.yml
 
 # Activate the environment
 conda activate surgery_robot
+
+```
+
+*(Note: Ensure your ROS 2 workspace is properly sourced if you are running the hardware or simulation interfaces.)*
+
+## 🚀 Quick Start
+
+The main entry point is the `run.py` script. You can run different modes by specifying the arguments.
+
+### 1. VLM-Guided Surgical Delivery
+
+Execute the automated instrument delivery pipeline (e.g., picking up tweezers and releasing them to the surgeon):
+
+```bash
+python run.py --mode rekep --task surgery_tool
+
+```
+
+*(Tip: Add `--use_cached_query` to bypass the VLM query and use locally cached programs for faster debugging.)*
+
+### 2. Collision Avoidance Sandbox
+
+Test the dual-arm environment and self-collision avoidance features in the testing sandbox:
+
+```bash
+python run.py --mode test --enable_self_collision_avoidance --enable_env_collision_avoidance
+
+```
+
+### 3. Custom Natural Language Instructions
+
+Override predefined tasks by passing natural language instructions directly:
+
+```bash
+python run.py --mode rekep --instruction "Robot 1 picks up the tweezers. Then Robot 1 holds it above 10 cm. Then Robot 1 releases the tweezers on the desk."
+
+```
+
+## ⚙️ Hardware Setup
+
+The real-world experimental platform for this system consists of:
+
+* 
+**Robotic Arms**: 2x Franka Research 3 robotic arms.
+
+
+* 
+**Low-Level Control**: Industrial computers running Ubuntu 22.04 LTS and PREEMPT_RT kernel at 1 kHz.
+
+
+* 
+**Perception**: 3x Intel RealSense D435i RGB-D cameras.
+
+
+* 
+**Middleware**: ROS 2.
+
+
+
+
+
+
+
