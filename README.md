@@ -8,8 +8,7 @@
   &nbsp;
   <a href="#"><img src="https://img.shields.io/badge/%F0%9F%8F%A0%20Project-Homepage-blue" alt="Project Homepage"></a>
   &nbsp;
-  <a href="#"><img src="https://img.shields.io/badge/%F0%9F%8E%AC%20Video-YouTube-red" alt="YouTube Video"></a>
-  &nbsp;
+  
   <a href="https://img.shields.io/badge/license-MIT-blue.svg"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   &nbsp;
   <a href="https://img.shields.io/badge/ROS-2-green"><img src="https://img.shields.io/badge/ROS-2-green" alt="ROS2"></a>
