@@ -226,7 +226,7 @@ class CamerasDataloader:
     def __init__(self, max_steps=1e6):
         self.max_steps = int(max_steps)
         self.step = 0
-        self.global_config = get_config(config_path="/home/luo/ReKep/configs/config.yaml")
+        self.global_config = get_config(config_path="./configs/config.yaml")
         self.realsense_manager = setup_realsense_manager(self.global_config)
         align_to = rs.stream.color
         self.align = rs.align(align_to)

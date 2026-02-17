@@ -193,7 +193,7 @@ class RobotInterface(Node):
 
 def command_generator(node):
     """Simulate an external process that updates the node"""
-    file_path = "/home/luo/ReKep/pyros/test/test_points.txt"
+    file_path = "./pyros/test/test_points.txt"
     try:
         file = open(file_path, 'r')
     except FileNotFoundError:

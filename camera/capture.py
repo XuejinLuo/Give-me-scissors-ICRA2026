@@ -216,7 +216,7 @@ def start_capture2(global_config, save_path):
 	return point_cloud_cumulative, filtered_point_cloud
 
 if __name__ == "__main__":
-	global_config = get_config(config_path="/home/luo/ReKep/configs/config.yaml")
+	global_config = get_config(config_path="./configs/config.yaml")
 	point_cloud_cumulative, point_cloud_first_camera = start_capture2(global_config,"output")
 	print("Point cloud shape:", point_cloud_first_camera.shape)
 	print(point_cloud_first_camera[:, 200, 200])

@@ -36,31 +36,31 @@ if __name__ == "__main__":
     task_list = {
         'box': {
             'instruction': 'Pick up the black box and hold it 0.2m above the green pot, then place it at 5cm above the bottom of the pot (remember to release the box) and release the black box. When the tasks finish, robot end-effector returns to the safe position.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/box',
+            'rekep_program_dir': './vlm_query/box',
             },
         'toolbox': {
             'instruction': 'Pick up the blue box and hold it 0.2m above the green pot, then place it at 5cm above the bottom of the pot (z = 0.05m) and release the blue box. When the tasks finish, robot end-effector returns to the safe position.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/box',
+            'rekep_program_dir': './vlm_query/box',
             },
         'tool': {
             'instruction': 'Pick up the yellow tool and hold it 0.2m above the green pot, then place it at 5cm above the bottom of the pot (z = 0.05m) and release the yellow tool. When the tasks finish, robot end-effector returns to the safe position.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/box',
+            'rekep_program_dir': './vlm_query/box',
             },
         'pen': {
             'instruction': 'Pick up the black pen and put it in the pot.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/pen',
+            'rekep_program_dir': './vlm_query/pen',
             },
         'dualarm': {
             'instruction': 'Pick up the black pen and put it in the pot.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/dualarm',
+            'rekep_program_dir': './vlm_query/dualarm',
             },
         'surgery_tool': {
             'instruction': 'Robot 1 picks up the tweezers. Then Robot 1 holds it above 10 cm. Then Robot 1 releases the tweezers on the desk. Robot 2 keeps stll.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/surgery_tool',
+            'rekep_program_dir': './vlm_query/surgery_tool',
             },
         'test': {
             'instruction': 'Robot 1 picks up the tweezers. Then Robot 1 holds it above 10 cm. Then Robot 1 releases the tweezers on the desk. Robot 2 keeps stll.',
-            'rekep_program_dir': '/home/luo/ReKep/vlm_query/test',
+            'rekep_program_dir': './vlm_query/test',
             },
     }
     task_name = args.task
